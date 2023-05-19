@@ -11,18 +11,14 @@ import ColorChanger from "./ColorChanger";
 
 const ExcelChart = () => {
   const [chartData, setChartData] = useState([]);
-  const [color, SetColor] = useState([
-    "rgba(185,32,233,22)",
-    "rgba(134,15,23,22)",
-    "rgba(246,10,23,22)",
-    "rgba(081,302,23,22)",
-    "rgba(459,302,23,22)",
-    "rgba(0,0,255)",
-  ]);
+  const [BgColor, SetBgColor] = useState("");
+  const [color, SetColor] = useState(["cyan,gray,green"]);
 
-  const handleColorChange = (newColor) => {
-    SetColor(newColor.hex);
+  const handleColorChange = (e) => {
+    SetBgColor(e.target.value);
   };
+
+  const [value, SetValue] = useState("")
 
   const handleFileUpload = (e) => {
     const reader = new FileReader();
@@ -43,19 +39,26 @@ const ExcelChart = () => {
       {
         label: "Data Fetched",
         data: [],
-        // backgroundColor: [
-        //   "rgba(185,32,233,22)",
-        //   "rgba(134,15,23,22)",
-        //   "rgba(246,10,23,22)",
-        //   "rgba(081,302,23,22)",
-        //   "rgba(459,302,23,22)",
-        //   "rgba(0,0,255)",
-        // ],
-        backgroundColor: color,
+        backgroundColor: [
+          "rgba(185,32,233,22)",
+          "rgba(134,15,23,22)",
+          "rgba(246,10,23,22)",
+          "rgba(081,302,23,22)",
+          "rgba(459,302,23,22)",
+          "rgba(0,0,255)",
+        ],
         borderWidth: 5,
       },
     ],
   });
+
+  useEffect(() => {
+    const updatedColor = [...data.datasets[0].backgroundColor];
+    updatedColor[value] = BgColor;
+    SetColor(updatedColor);
+    SetBgColor('')
+  }, [BgColor, color]);
+
 
   useEffect(() => {
     const updatedData = {
@@ -65,11 +68,12 @@ const ExcelChart = () => {
         {
           ...data.datasets[0],
           data: chartData.map((data) => data.__EMPTY_1),
+          backgroundColor: color
         },
       ],
     };
     setData(updatedData);
-  }, [chartData]);
+  }, [chartData, BgColor]);
 
   return (
     <>
@@ -80,10 +84,28 @@ const ExcelChart = () => {
         </div>
       </div>
 
-
-      <div className="container">
-        <ColorChanger color={color} onchange={handleColorChange} />
+      <div>
+        <div className="d-flex container  w-25 justify-content-center">
+          <label className='font-bold'>Choose Color</label>
+          <input className="form-control form-control-lg" type="color" value={BgColor}
+            onChange={handleColorChange}
+          />
+        </div>
       </div>
+
+      <div>
+        <div className="d-flex container mt-5 w-25 justify-content-center">
+          <label className='font-bold'>Choose Value</label>
+          <input className=" form-control form-control-lg" type="number" onChange={(e) => { SetValue(e.target.value) }} />
+        </div>
+      </div>
+
+
+
+
+      {/* <div className="container">
+        <ColorChanger color={color} onchange={handleColorChange} />
+      </div> */}
 
 
       <div>
