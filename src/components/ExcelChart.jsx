@@ -11,7 +11,7 @@ import ColorChanger from "./ColorChanger";
 
 const ExcelChart = () => {
   const [chartData, setChartData] = useState([]);
-  const [BgColor, SetBgColor] = useState("");
+  const [BgColor, SetBgColor] = useState("#fff");
   const [color, SetColor] = useState(["cyan,gray,green"]);
 
   const handleColorChange = (e) => {
@@ -84,69 +84,73 @@ const ExcelChart = () => {
         </div>
       </div>
 
-      <div>
-        <div className="d-flex container  w-25 justify-content-center">
-          <label className='font-bold'>Choose Color</label>
-          <input className="form-control form-control-lg" type="color" value={BgColor}
-            onChange={handleColorChange}
-          />
+      <div className="d-flex flex-wrap">
+        <div className="container w-25">
+          <label className='fw-bolder'>Choose Color</label>
+          <input className="form-control form-control-lg mt-1" type="color" value={BgColor}
+            onChange={handleColorChange} />
+        </div>
+
+        <div className="container w-25">
+          <label className='fw-bolder'>Choose Value</label>
+          <input className=" form-control form-control-lg mt-1" type="number" placeholder="Enter a Value" onChange={(e) => { SetValue(e.target.value) }} />
         </div>
       </div>
 
-      <div>
-        <div className="d-flex container mt-5 w-25 justify-content-center">
-          <label className='font-bold'>Choose Value</label>
-          <input className=" form-control form-control-lg" type="number" onChange={(e) => { SetValue(e.target.value) }} />
+      <div class="row">
+        <div class="col">
+          <Card
+            className="shadow mt-5 p-5 bg-color text-dark"
+            style={{ width: "80%", margin: "auto", border: "5px solid Cyan" }}>
+            <h3 className="text-center fw-bolder">Bar chart Visualizer</h3>
+            <BarChart data={data} />
+          </Card>
+        </div>
+        <div class="col">
+          <Card
+            className="shadow mt-5 p-5 bg-color text-dark"
+            style={{ width: "80%", margin: "auto", border: "5px solid cyan" }}>
+            <h3 className="text-center fw-bolder">Line chart Visualizer</h3>
+            <LineChart data={data} />
+          </Card>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col">
+          <Card
+            className="shadow p-5 mt-5 bg-color text-dark"
+            style={{ width: "80%", margin: "auto", border: "5px solid cyan" }}>
+            <h3 className="text-center fw-bolder">Radar chart Visualizer</h3>
+            <RadarChart data={data} />
+          </Card>
+
+        </div>
+        <div class="col">
+          <Card
+            className="shadow p-5 mt-5 bg-color text-dark"
+            style={{ width: "80%", margin: "auto", border: "5px solid cyan" }} >
+            <h3 className="text-center fw-bolder">Pie chart Visualizer</h3>
+            <Piechart data={data} />
+          </Card>
         </div>
       </div>
 
 
 
+      <div class="row">
+        <div class="col">
+          <Card
+            className="shadow mt-5 mb-5 p-5 bg-color text-dark "
+            style={{ width: "80%", margin: "auto", border: "5px solid cyan" }} >
+            <h3 className="text-center fw-bolder">Doughnut chart Visualizer</h3>
+            <DoughnutChart data={data} />
+          </Card>
 
-      {/* <div className="container">
-        <ColorChanger color={color} onchange={handleColorChange} />
-      </div> */}
-
-
-      <div>
-        <Card
-          className="shadow mt-5 p-5 bg-color text-dark"
-          style={{ width: "70%", margin: "auto", border: "5px solid Cyan" }}>
-          <h3 className="text-center">Bar chart Visualizer</h3>
-          <BarChart data={data} />
-        </Card>
-
-        <Card
-          className="shadow mt-5 p-5 bg-color text-dark"
-          style={{ width: "70%", margin: "auto", border: "5px solid cyan" }}>
-          <h3 className="text-center">Line chart Visualizer</h3>
-          <LineChart data={data} />
-        </Card>
-
-
-        <Card
-          className="shadow mt-5 p-5 bg-color text-dark"
-          style={{ width: "70%", margin: "auto", border: "5px solid cyan" }}>
-          <h3 className="text-center">Radar chart Visualizer</h3>
-          <RadarChart data={data} />
-        </Card>
-
-        <Card
-          className="shadow mt-4 p-5 bg-color text-dark"
-          style={{ width: "70%", margin: "auto", border: "5px solid cyan" }} >
-          <h3 className="text-center">Pie chart Visualizer</h3>
-          <Piechart data={data} />
-        </Card>
-
-        <Card
-          className="shadow mt-4 mb-5 p-5 bg-color text-dark"
-          style={{ width: "70%", margin: "auto", border: "5px solid cyan" }} >
-          <h3 className="text-center">Doughnut chart Visualizer</h3>
-          <DoughnutChart data={data} />
-        </Card>
-
-
-        {/* 
+        </div>
+        <div class="col">
+          {/* 
         <Card
           className="shadow mt-4 p-5 bg-color text-dark"
           style={{ width: "80%", margin: "auto", border: "5px solid cyan" }} >
@@ -155,7 +159,13 @@ const ExcelChart = () => {
             data={data}
             layout={{ width: 500, height: 500, title: 'Clustered Column Visualizer' }} />
         </Card> */}
+        </div>
       </div>
+
+
+
+
+
     </>
   );
 };

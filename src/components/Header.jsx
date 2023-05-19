@@ -6,7 +6,7 @@ const Header = () => {
     <>
       <nav className="shadow navbar navbar-expand-lg bg-body-tertiary bg-color text-dark">
         <div className="container-fluid">
-          <Link className="navbar-brand text-center font-weight-bold" href="/">Data Visualizer</Link>
+          <Link className="navbar-brand fw-bold text-center" href="/">Data Visualizer</Link>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             </ul>
